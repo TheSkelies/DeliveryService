@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "name": "Сергей Иванов",
+    "phone": "+7-900-123-45-67",
+    "vehicle": "car",
+    "departure_date": "2026-09-18",
+    "expected_delivery_date": "2026-09-20",
+    "capacity_kg": 100.0,
+    "is_available": true,
+    "package_ids": [
+      1
+    ]
+  }
+]
