@@ -94,3 +94,28 @@ pytest
 ```bash
 flake8 .
 ```
+
+
+## Используемые технологии
+- Python 3
+- Django 5.2 — веб-фреймворк
+- HTML, CSS, Bootstrap 5.3 (CDN)
+- JSON-файлы — источник данных (ПР3)
+- pytest, flake8
+
+## Веб-страницы (ПР5)
+| URL | Назначение | View |
+|---|---|---|
+| `/` | главная, навигация | `homepage.views.index` |
+| `/packages/` | список посылок | `packages.views.packages` |
+| `/packages/<int:package_id>/` | карточка посылки (404, если нет) | `packages.views.package_detail` |
+| `/couriers/` | список доставщиков | `couriers.views.couriers` |
+| `/couriers/<int:courier_id>/` | карточка доставщика (404, если нет) | `couriers.views.courier_detail` |
+
+Общая 404-страница: `homepage.views.page_not_found` через `handler404`.
+
+## Запуск веб-версии
+```bash
+python manage.py migrate
+python manage.py runserver
+# http://127.0.0.1:8000/
