@@ -2,13 +2,32 @@
 
 {% block title %}Посылки — DeliveryService{% endblock %}
 
+
+
 {% block content %}
+<a href="{% url 'couriers:free' %}">Найти свободных доставщиков</a>
+
 <h1>Посылки</h1>
 <p>Всего посылок: {{ packages|length }}</p>
 
 {% for package in packages %}
-    {% include "packages/includes/package_card.html" %}
+<article class="card package-card mb-3">
+  <div class="card-body">
+    <h2 class="card-title h5">#{{ package.id }} [{{ package.category }}]</h2>
+    <p class="card-text">
+      {{ package.sender_name|default:"—" }} → {{ package.recipient_name|default:"—" }}
+    </p>
+    <p class="card-text small text-muted">
+      доставка: {{ package.arrival_date }},
+      вес: {{ package.weight }} кг,
+      курьер: {{ package.courier_name|default:"не назначен" }}
+    </p>
+    <a href="{% url 'packages:detail' package.id %}" class="btn btn-primary btn-sm">
+      Подробнее
+    </a>
+  </div>
+</article>
 {% empty %}
-    <p class="text-muted">Посылок пока нет.</p>
+<p class="text-muted">Посылок пока нет.</p>
 {% endfor %}
 {% endblock %}

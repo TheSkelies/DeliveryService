@@ -7,8 +7,28 @@
 <p>Всего доставщиков: {{ couriers|length }}</p>
 
 {% for courier in couriers %}
-    {% include "couriers/includes/courier_card.html" %}
+<article class="card courier-card mb-3">
+  <div class="card-body">
+    <h2 class="card-title h5">#{{ courier.id }} — {{ courier.name }}</h2>
+    <p class="card-text">
+      {% if courier.is_available %}
+        <span class="badge bg-success">свободен</span>
+      {% else %}
+        <span class="badge bg-secondary">занят</span>
+      {% endif %}
+    </p>
+    <p class="card-text small text-muted">
+      выезд: {{ courier.departure_date }},
+      доставка: {{ courier.expected_delivery_date }},
+      загрузка: {{ courier.total_weight }} / {{ courier.capacity_kg }} кг,
+      посылок: {{ courier.packages_count }}
+    </p>
+    <a href="{% url 'couriers:detail' courier.id %}" class="btn btn-primary btn-sm">
+      Подробнее
+    </a>
+  </div>
+</article>
 {% empty %}
-    <p class="text-muted">Доставщиков пока нет.</p>
+<p class="text-muted">Доставщиков пока нет.</p>
 {% endfor %}
 {% endblock %}

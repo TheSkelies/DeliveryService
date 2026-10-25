@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Свободные доставщики — DeliveryService{% endblock %}
+
+{% block content %}
+<h1>Свободные доставщики</h1>
+
+<form method="get" class="mb-4">
+  <label for="date">Дата доставки:</label>
+  <input type="date" id="date" name="date" value="{{ booking_date }}">
+  <button type="submit" class="btn btn-primary">Найти</button>
+</form>
+
+{% if booking_date %}
+<h2 class="h5">Дата: {{ booking_date }}</h2>
+
+{% for c in couriers %}
+<article class="card mb-2">
+  <div class="card-body">
+    <h3 class="h6">{{ c.name }}</h3>
+    <p class="small text-muted">
+      {{ c.phone }}, транспорт: {{ c.vehicle }},
+      грузоподъёмность: {{ c.capacity_kg }} кг
+    </p>
+  </div>
+</article>
+{% empty %}
+<p class="text-muted">На выбранную дату свободных доставщиков нет.</p>
+{% endfor %}
+{% endif %}
+{% endblock %}

@@ -14,23 +14,27 @@
     <p><strong>Транспорт:</strong> {{ courier.vehicle }}</p>
     <p><strong>Выезд:</strong> {{ courier.departure_date }}</p>
     <p><strong>Примерная доставка:</strong> {{ courier.expected_delivery_date }}</p>
-    <p><strong>Загрузка:</strong> {{ courier.total_weight }} / {{ courier.capacity_kg }} кг</p>
+    <p><strong>Грузоподъёмность:</strong> {{ courier.capacity_kg }} кг</p>
     <p><strong>Состояние:</strong>
-      {% include "couriers/includes/courier_status.html" %}
+      {% if courier.is_available %}
+        <span class="badge bg-success">свободен</span>
+      {% else %}
+        <span class="badge bg-secondary">занят</span>
+      {% endif %}
     </p>
 
     <h2 class="h6 mt-4">Назначенные посылки</h2>
-    {% if courier.packages %}
-      <ul class="list-group">
-        {% for p in courier.packages %}
-          <li class="list-group-item">
-            <a href="{% url 'packages:detail' p.id %}">#{{ p.id }} [{{ p.category }}]</a>
-            — {{ p.weight }} кг
-          </li>
-        {% endfor %}
-      </ul>
+    {% if courier_packages %}
+    <ul class="list-group">
+      {% for p in courier_packages %}
+      <li class="list-group-item">
+        <a href="{% url 'packages:detail' p.id %}">#{{ p.id }} [{{ p.category }}]</a>
+        — {{ p.weight }} кг, доставка {{ p.arrival_date }}
+      </li>
+      {% endfor %}
+    </ul>
     {% else %}
-      <p class="text-muted">Посылки не назначены.</p>
+    <p class="text-muted">Посылки не назначены.</p>
     {% endif %}
   </div>
 </div>
