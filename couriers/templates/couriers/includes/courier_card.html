@@ -1,0 +1,18 @@
+<article class="card courier-card mb-3">
+  <div class="card-body">
+    <h2 class="card-title h5">
+      #{{ courier.id }} — {{ courier.name|default:"Без имени" }}
+    </h2>
+    <p class="card-text">
+      {% include "couriers/includes/courier_status.html" %}
+    </p>
+    <p class="card-text small text-muted">
+      выезд: {{ courier.departure_date }},
+      доставка: {{ courier.expected_delivery_date }},
+      загрузка: {{ courier.total_weight }} / {{ courier.capacity_kg }} кг
+    </p>
+    <a href="{% url 'couriers:detail' courier.id %}" class="btn btn-primary btn-sm">
+      Подробнее
+    </a>
+  </div>
+</article>

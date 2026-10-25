@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Главная — DeliveryService{% endblock %}
+
+{% block content %}
+<h1 class="display-4">DeliveryService</h1>
+<p class="lead">Сервис учёта посылок и доставщиков.</p>
+
+<p>Основные разделы:</p>
+<a href="{% url 'packages:list' %}" class="btn btn-primary me-2">Посылки</a>
+<a href="{% url 'couriers:list' %}" class="btn btn-secondary">Доставщики</a>
+{% endblock %}

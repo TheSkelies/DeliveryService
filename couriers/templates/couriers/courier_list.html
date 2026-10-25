@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Доставщики — DeliveryService{% endblock %}
+
+{% block content %}
+<h1>Доставщики</h1>
+<p>Всего доставщиков: {{ couriers|length }}</p>
+
+{% for courier in couriers %}
+    {% include "couriers/includes/courier_card.html" %}
+{% empty %}
+    <p class="text-muted">Доставщиков пока нет.</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,21 @@
+<article class="card package-card mb-3">
+  <div class="card-body">
+    <h2 class="card-title h5">
+      #{{ package.id }} — {{ package.category|default:"Без категории" }}
+    </h2>
+    <p class="card-text">
+      {{ package.sender.name|default:"—" }} →
+      {{ package.recipient.name|default:"—" }}
+    </p>
+    <p class="card-text">
+      <small>
+        доставка: {{ package.arrival_date }},
+        вес: {{ package.weight }} кг,
+        курьер: {{ package.courier.name|default:"не назначен" }}
+      </small>
+    </p>
+    <a href="{% url 'packages:detail' package.id %}" class="btn btn-primary btn-sm">
+      Подробнее
+    </a>
+  </div>
+</article>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% if package %}#{{ package.id }} — DeliveryService{% else %}Посылка не найдена{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if package %}
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title">Посылка #{{ package.id }}</h1>
+    <p class="card-text"><strong>Категория:</strong> {{ package.category }}</p>
+    <p class="card-text"><strong>Отправитель:</strong> {{ package.sender.name|default:"—" }}</p>
+    <p class="card-text"><strong>Получатель:</strong> {{ package.recipient.name|default:"—" }}</p>
+    <p class="card-text"><strong>Курьер:</strong> {{ package.courier.name|default:"не назначен" }}</p>
+    <p class="card-text"><strong>Отправление:</strong> {{ package.departure_date }}</p>
+    <p class="card-text"><strong>Прибытие:</strong> {{ package.arrival_date }}</p>
+    <p class="card-text"><strong>Вес:</strong> {{ package.weight }} кг</p>
+    <p class="card-text">
+      <strong>Статус:</strong> {{ package.status }}
+    </p>
+  </div>
+</div>
+{% else %}
+<h1 class="text-danger">Посылка не найдена</h1>
+<p>Посылка с указанным идентификатором отсутствует.</p>
+{% endif %}
+
+<a href="{% url 'packages:list' %}" class="btn btn-outline-secondary mt-3">
+  ← к списку посылок
+</a>
+{% endblock %}

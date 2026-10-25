@@ -5,7 +5,7 @@
     "departure_date": "2026-09-15",
     "arrival_date": "2026-09-20",
     "weight": 0.5,
-    "status": "Package at the drop-off point",
+    "status": "Ожидает отправки",
     "sender_id": 1,
     "recipient_id": 2,
     "courier_id": 1

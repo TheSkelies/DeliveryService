@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% if courier %}{{ courier.name }} — DeliveryService{% else %}Доставщик не найден{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if courier %}
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title">{{ courier.name }}</h1>
+    <p><strong>ID:</strong> {{ courier.id }}</p>
+    <p><strong>Телефон:</strong> {{ courier.phone }}</p>
+    <p><strong>Транспорт:</strong> {{ courier.vehicle }}</p>
+    <p><strong>Выезд:</strong> {{ courier.departure_date }}</p>
+    <p><strong>Примерная доставка:</strong> {{ courier.expected_delivery_date }}</p>
+    <p><strong>Загрузка:</strong> {{ courier.total_weight }} / {{ courier.capacity_kg }} кг</p>
+    <p><strong>Состояние:</strong>
+      {% include "couriers/includes/courier_status.html" %}
+    </p>
+
+    <h2 class="h6 mt-4">Назначенные посылки</h2>
+    {% if courier.packages %}
+      <ul class="list-group">
+        {% for p in courier.packages %}
+          <li class="list-group-item">
+            <a href="{% url 'packages:detail' p.id %}">#{{ p.id }} [{{ p.category }}]</a>
+            — {{ p.weight }} кг
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted">Посылки не назначены.</p>
+    {% endif %}
+  </div>
+</div>
+{% else %}
+<h1 class="text-danger">Доставщик не найден</h1>
+<p>Доставщик с указанным идентификатором отсутствует.</p>
+{% endif %}
+
+<a href="{% url 'couriers:list' %}" class="btn btn-outline-secondary mt-3">
+  ← к списку доставщиков
+</a>
+{% endblock %}

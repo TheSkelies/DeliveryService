@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Посылки — DeliveryService{% endblock %}
+
+{% block content %}
+<h1>Посылки</h1>
+<p>Всего посылок: {{ packages|length }}</p>
+
+{% for package in packages %}
+    {% include "packages/includes/package_card.html" %}
+{% empty %}
+    <p class="text-muted">Посылок пока нет.</p>
+{% endfor %}
+{% endblock %}

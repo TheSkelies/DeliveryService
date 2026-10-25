@@ -1,0 +1,28 @@
+body {
+    min-height: 100vh;
+}
+
+.site-logo {
+    display: block;
+    width: 120px;
+    height: auto;
+    margin: 1rem auto;
+}
+
+.package-card,
+.courier-card {
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.courier-status {
+    font-weight: 600;
+}
+
+.courier-status-available {
+    color: #fff;
+}
+
+.courier-status-busy {
+    color: #fff;
+}

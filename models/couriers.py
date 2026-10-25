@@ -1,7 +1,7 @@
 from datetime import date
 from typing import List, Optional, TYPE_CHECKING
 
-if TYPE_CHECKING:  # избегаем циклического импорта
+if TYPE_CHECKING:
     from .packages import Package
 
 
