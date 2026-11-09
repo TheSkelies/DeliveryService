@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "homepage",
     "packages",
     "couriers",
+    "users",
 ]
 
 MIDDLEWARE = [

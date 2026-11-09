@@ -15,12 +15,12 @@
   <div class="card-body">
     <h2 class="card-title h5">#{{ package.id }} [{{ package.category }}]</h2>
     <p class="card-text">
-      {{ package.sender_name|default:"—" }} → {{ package.recipient_name|default:"—" }}
+      {{ package.sender.name|default:"—" }} → {{ package.recipient.name|default:"—" }}
     </p>
     <p class="card-text small text-muted">
       доставка: {{ package.arrival_date }},
       вес: {{ package.weight }} кг,
-      курьер: {{ package.courier_name|default:"не назначен" }}
+      курьер: {{ package.courier.name|default:"не назначен" }}
     </p>
     <a href="{% url 'packages:detail' package.id %}" class="btn btn-primary btn-sm">
       Подробнее

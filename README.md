@@ -119,3 +119,25 @@ flake8 .
 python manage.py migrate
 python manage.py runserver
 # http://127.0.0.1:8000/
+```
+
+## Слой данных (ПР9, Django ORM)
+
+### Модели
+- `users.models.User` — пользователь: `name`, `email`.
+- `couriers.models.Courier` — доставщик: `name`, `phone`, `vehicle`,
+  `departure_date`, `expected_delivery_date`, `capacity_kg`, `is_available`,
+  обратная связь `packages` (FK из `Package`).
+- `packages.models.Package` — посылка: `category`, `departure_date`,
+  `arrival_date`, `weight`, `status`, FK `sender`, `recipient` (on_delete=PROTECT),
+  FK `courier` (on_delete=SET_NULL).
+
+### Связи
+- `Package.sender → User` (many-to-one, related_name="sent_packages").
+- `Package.recipient → User` (many-to-one, related_name="received_packages").
+- `Package.courier → Courier` (many-to-one, related_name="packages").
+
+### Миграции
+```bash
+python manage.py makemigrations users couriers packages
+python manage.py migrate
