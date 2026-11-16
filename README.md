@@ -141,3 +141,13 @@ python manage.py runserver
 ```bash
 python manage.py makemigrations users couriers packages
 python manage.py migrate
+```
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+python manage.py showmigrations
+python manage.py sqlmigrate packages 0002
+```
+
+

@@ -11,15 +11,15 @@
   <div class="card-body">
     <h2 class="card-title h5">#{{ courier.id }} — {{ courier.name }}</h2>
     <p class="card-text">
-      {% if courier.is_available %}
+      {% if courier.availability == "available" %}
         <span class="badge bg-success">свободен</span>
-      {% else %}
-        <span class="badge bg-secondary">занят</span>
-      {% endif %}
+        {% elif courier.availability == "busy" %}
+            <span class="badge bg-warning text-dark">занят</span>
+        {% else %}
+            <span class="badge bg-secondary">не на связи</span>
+        {% endif %}
     </p>
     <p class="card-text small text-muted">
-      выезд: {{ courier.departure_date }},
-      доставка: {{ courier.expected_delivery_date }},
       загрузка: {{ courier.total_weight }} / {{ courier.capacity_kg }} кг,
       посылок: {{ courier.packages_count }}
     </p>

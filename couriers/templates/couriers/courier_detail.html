@@ -12,15 +12,15 @@
     <p><strong>ID:</strong> {{ courier.id }}</p>
     <p><strong>Телефон:</strong> {{ courier.phone }}</p>
     <p><strong>Транспорт:</strong> {{ courier.vehicle }}</p>
-    <p><strong>Выезд:</strong> {{ courier.departure_date }}</p>
-    <p><strong>Примерная доставка:</strong> {{ courier.expected_delivery_date }}</p>
     <p><strong>Грузоподъёмность:</strong> {{ courier.capacity_kg }} кг</p>
     <p><strong>Состояние:</strong>
-      {% if courier.is_available %}
-        <span class="badge bg-success">свободен</span>
-      {% else %}
-        <span class="badge bg-secondary">занят</span>
-      {% endif %}
+        {% if courier.availability == "available" %}
+            <span class="badge bg-success">свободен</span>
+        {% elif courier.availability == "busy" %}
+            <span class="badge bg-warning text-dark">занят</span>
+        {% else %}
+            <span class="badge bg-secondary">не на связи</span>
+        {% endif %}
     </p>
 
     <h2 class="h6 mt-4">Назначенные посылки</h2>

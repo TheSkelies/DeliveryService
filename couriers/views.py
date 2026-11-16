@@ -15,9 +15,7 @@ def couriers(request):
         )
         .order_by("name")
     )
-    return render(
-        request, "couriers/courier_list.html", {"couriers": couriers_qs}
-    )
+    return render(request, "couriers/courier_list.html", {"couriers": couriers_qs})
 
 
 def courier_detail(request, courier_id):
@@ -33,32 +31,24 @@ def courier_detail(request, courier_id):
 
 
 def couriers_free(request):
-    """Свободные доставщики на выбранную дату."""
     raw_date = request.GET.get("date", "").strip()
-    couriers_qs = []
+    result = Courier.objects.none()
     error = None
 
     if raw_date:
         try:
-            selected_date = datetime.strptime(raw_date, "%Y-%m-%d").date()
+            selected = datetime.strptime(raw_date, "%Y-%m-%d").date()
         except ValueError:
             error = "Укажите корректную дату."
         else:
-            couriers_qs = (
+            result = (
                 Courier.objects
-                .filter(
-                    is_available=True,
-                    expected_delivery_date=selected_date,
-                )
+                .filter(availability=Courier.Availability.AVAILABLE)
                 .order_by("name")
             )
 
     return render(
         request,
         "couriers/couriers_free.html",
-        {
-            "couriers": couriers_qs,
-            "booking_date": raw_date,
-            "error": error,
-        },
+        {"couriers": result, "booking_date": raw_date, "error": error},
     )

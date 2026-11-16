@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -24,5 +26,13 @@ urlpatterns = [
     path("couriers/", include("couriers.urls")),
 ]
 
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path("__debug__/", include(debug_toolbar.urls)),
+        *urlpatterns,
+    ]
+
 # собственная страница 404 (проверяется при DEBUG = False)
 handler404 = "homepage.views.page_not_found"
+

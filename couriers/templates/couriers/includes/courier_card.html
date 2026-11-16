@@ -7,8 +7,6 @@
       {% include "couriers/includes/courier_status.html" %}
     </p>
     <p class="card-text small text-muted">
-      выезд: {{ courier.departure_date }},
-      доставка: {{ courier.expected_delivery_date }},
       загрузка: {{ courier.total_weight }} / {{ courier.capacity_kg }} кг
     </p>
     <a href="{% url 'couriers:detail' courier.id %}" class="btn btn-primary btn-sm">

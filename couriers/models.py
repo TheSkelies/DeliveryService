@@ -5,21 +5,25 @@ from django.utils.functional import cached_property
 class Courier(models.Model):
     """Доставщик."""
 
+    class Availability(models.TextChoices):
+        AVAILABLE = "available", "Свободен"
+        BUSY = "busy", "Занят"
+        OFFLINE = "offline", "Не на связи"
+
     name = models.CharField(max_length=200, verbose_name="Имя доставщика")
     phone = models.CharField(max_length=30, verbose_name="Телефон")
     vehicle = models.CharField(max_length=30, verbose_name="Транспорт")
-    departure_date = models.DateField(verbose_name="Дата выезда")
-    expected_delivery_date = models.DateField(
-        verbose_name="Примерная дата доставки",
+    availability = models.CharField(
+        max_length=20,
+        choices=Availability.choices,
+        default=Availability.AVAILABLE,
+        verbose_name="Доступность",
     )
     capacity_kg = models.FloatField(
         default=50.0,
         verbose_name="Грузоподъёмность, кг",
     )
-    is_available = models.BooleanField(
-        default=True,
-        verbose_name="Доступен",
-    )
+
 
     def __str__(self) -> str:
         return f"{self.name} ({self.vehicle})"
@@ -32,7 +36,7 @@ class Courier(models.Model):
         return total or 0.0
 
     def can_take_package(self, package) -> bool:
-        if not self.is_available:
+        if self.availability != Courier.Availability.AVAILABLE:
             return False
         if package.arrival_date != self.expected_delivery_date:
             return False
@@ -40,7 +44,7 @@ class Courier(models.Model):
 
     def can_take_package(self, package) -> bool:
         """Может ли доставщик взять посылку (бизнес-правило ПР3)."""
-        if not self.is_available:
+        if self.availability != Courier.Availability.AVAILABLE:
             return False
         if package.arrival_date != self.expected_delivery_date:
             return False

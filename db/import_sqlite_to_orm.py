@@ -66,12 +66,8 @@ def main() -> None:
                     "name": row["name"],
                     "phone": row["phone"],
                     "vehicle": row["vehicle"],
-                    "departure_date": date.fromisoformat(row["departure_date"]),
-                    "expected_delivery_date": date.fromisoformat(
-                        row["expected_delivery_date"]
-                    ),
                     "capacity_kg": float(row["capacity_kg"]),
-                    "is_available": bool(row["is_available"]),
+                    "availability": "available" if bool(row["is_available"]) else "busy",
                 },
             )
 

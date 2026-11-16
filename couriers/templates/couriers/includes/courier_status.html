@@ -1,5 +1,7 @@
-{% if courier.is_available %}
-  <span class="badge bg-success courier-status courier-status-available">свободен</span>
+{% if courier.availability == "available" %}
+    <span class="badge bg-success">свободен</span>
+{% elif courier.availability == "busy" %}
+    <span class="badge bg-warning text-dark">занят</span>
 {% else %}
-  <span class="badge bg-secondary courier-status courier-status-busy">занят</span>
+    <span class="badge bg-secondary">не на связи</span>
 {% endif %}

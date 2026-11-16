@@ -6,5 +6,5 @@ app_name = "packages"
 urlpatterns = [
     path("", views.packages, name="list"),
     path("statistics/", views.statistics, name="statistics"),
-    path("<int:package_id>/", views.package_detail, name="detail"),
+    path("<slug:slug>/", views.package_detail, name="detail"),
 ]
